@@ -6,7 +6,7 @@ data='{"head":{"sessionid":"undefined","seqid":null},"body":{"emFirst_priom_vide
 a=1
 while a<20000000:
     for i in li:
-        r = requests.post('http://192.168.60.22/mtapi/cfg/hdresoutput',data=data.replace('xx',str(i)))
+        r = requests.post('http://192.168.32.36/mtapi/cfg/hdresoutput',data=data.replace('xx',str(i)))
         print r.text
         time.sleep(20)
         print time.asctime( time.localtime(time.time()) )
