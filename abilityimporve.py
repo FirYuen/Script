@@ -3,7 +3,9 @@ import requests
 import json
 import csv
 import time
-terminalIP = '192.168.60.22'
+import winsound
+
+terminalIP = '192.168.60.23'
 urlHangUp = 'http://'+terminalIP+'/mtapi/conf/hangupconf'
 dataHangUp = json.dumps({"head": {"sessionid": "undefined", "seqid": 0}, "body": {"basetype": 1, "eventid": "hangupconf"}})
 
@@ -16,7 +18,7 @@ excelName = 'test.csv'
 def excelTitle():
     with open(excelName, 'a+') as csvfile:
         spamwriter = csv.writer(csvfile, dialect='excel')
-        spamwriter.writerow(['emVideoFormat','emVidRes','callRate','mainVidEncFormat','mainVidEncFrame','mainVidEncBitrate','mainVidEncFrame','mainVidDecFormat','mainVidDecFrame','mainVidDecBitrate','mainVidDecFrame',])
+        spamwriter.writerow(['Time','emVideoFormat','emVidRes','callRate','mainVidEncFormat','mainVidEncFrame','mainVidEncBitrate','mainVidEncFrame','mainVidDecFormat','mainVidDecFrame','mainVidDecBitrate','mainVidDecFrame',])
 
 
 def callfunc():
@@ -74,9 +76,14 @@ videoFormat_dict = {
 
 def get_keys(d, value):
     return [k for k, v in d.items() if v == value]
+def beep():
+	for i in [1,2,3]:
+		winsound.Beep(3500,500)
+		time.sleep(0.1)
+		
 
 
-
+nowTime = time.strftime('%m%d-%H:%M:S',time.localtime(time.time()))
 
 def getInfoAndWRtoExcel(n):
     priVidprefer = requests.get('http://'+terminalIP+'/mtapi/cfg/prividprior?*').content
@@ -134,7 +141,7 @@ def getInfoAndWRtoExcel(n):
 
     with open(excelName, 'a+') as csvfile:
         spamwriter = csv.writer(csvfile, dialect='excel')
-        spamwriter.writerow([emVideoFormatStr,vidResStr,n,mainVidEncFormat,mainVidEncFrame,mainVidEncBitrate,mainVidEncFrame,mainVidDecFormat,mainVidDecFrame,mainVidDecBitrate,mainVidDecFrame,])
+        spamwriter.writerow([nowTime,emVideoFormatStr,vidResStr,n,mainVidEncFormat,mainVidEncFrame,mainVidEncBitrate,mainVidEncFrame,mainVidDecFormat,mainVidDecFrame,mainVidDecBitrate,mainVidDecFrame,])
 
 
 
@@ -194,7 +201,7 @@ for i in sky300FormatAndPal.keys():
 
 
 
-
+beep()
 
 
 exit()
