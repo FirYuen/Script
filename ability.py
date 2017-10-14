@@ -3,6 +3,7 @@ import requests
 import json
 import csv
 import time
+'''
 
 
 def callfunc():
@@ -108,9 +109,9 @@ urlPrividprior = 'http://192.168.60.23/mtapi/cfg/prividprior'
 #dataPrividPrior = {"head":{"sessionid":"undefined","seqid":0},"body":{"atVideoPriorParam":[{"emVideoFormat":i,"emVideoRes":a}]}}
 
 
-for i in [6, 4, 5, 0, 2]:
+for i in [6, 4, 5, 0, 2]:#几种视频格式
     if i == 6:
-        for n in [0, 21, 17, 16, 5, 13, 3]:
+        for n in [0, 21, 17, 16, 5, 13, 3]:#几种视频制式
             dataPrividPrior = {"head": {"sessionid": "undefined", "seqid": 1}, "body": {"atVideoPriorParam": [{"emVideoFormat": i, "emVideoRes": n}]}}
             data = json.dumps(dataPrividPrior)
             changePal = requests.post(urlPrividprior, data=data)
