@@ -7,18 +7,18 @@ sockIndex = 1
 def connToServer ():
     global sockIndex
     conn = socket.socket()
-    conn.connect(("192.168.60.23", 60001))
+    conn.connect(("192.168.60.22", 60001))
     conn.send(b'OspLog()')
     print sockIndex
     sockIndex = sockIndex + 1
     time.sleep(0.01)
-    #conn.close()
+    conn.close()
     #while True:
         #rev = conn.recv(1024)
-        #print 'get server msg:' + str(rev)
+        #print 'msg:' + str(rev)
         #break
 threads = []
-times = 2000000
+times = 200
 
 for i in range(0,times):
     t = threading.Thread(target=connToServer())
